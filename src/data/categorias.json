@@ -1,0 +1,26 @@
+[
+    {
+        "categoria": "Antojitos",
+        "url": "/categorias/Antojitos"
+    },
+    {
+        "categoria": "Desayunos",
+        "url": "/categorias/desayunos"
+    },
+    {
+        "categoria": "Comidas",
+        "url": "/categorias/Comidas"
+    },
+    {
+        "categoria": "Cenas",
+        "url": "/categorias/Cenas"
+    },
+    {
+        "categoria": "Postres",
+        "url": "/categorias/Postres"
+    },
+    {
+        "categoria": "Bebidas",
+        "url": "/categorias/Bebidas"
+    }
+]
