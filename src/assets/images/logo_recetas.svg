@@ -1,0 +1,31 @@
+<svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390.37 117.47">
+  <defs>
+    <style>
+      .cls-1{fill:none;stroke:#ffffff;stroke-miterlimit:10;stroke-width:2px;}
+      .cls-2{font-size:105.26px;}.cls-2,.cls-3,
+      .cls-4{fill:#ffffff;font-family:MyriadPro-Regular, Myriad Pro;}
+      .cls-3{font-size:93.88px;}.cls-4{font-size:93.5px;}
+    </style>
+  </defs>
+  <title>logo_recetas</title>
+  <path class="cls-1" d="M406.22,367.19c0-13.43-57.48-24.32-128.38-24.32s-128.38,10.89-128.38,24.32c0,
+  5.83,10.8,11.17,28.81,15.36,24.06,4.32,63.43,8.94,105.45,8.94a498.56,498.56,0,0,0,95.17-9.29C396,
+  378.07,406.22,372.86,406.22,367.19Z" transform="translate(-113.29 -324.86)"/>
+  <path class="cls-1" d="M380.25,382.57l-1.36-.37c-23.5,5.67-60,9.32-101.05,9.32-40.18,0-76-3.5-99.57-9"
+  transform="translate(-113.29 -324.86)"/>
+  <path class="cls-1" d="M157.46,395.45c0,12.74,54.51,23.07,121.76,23.07S401,408.19,401,395.45"
+  transform="translate(-113.29 -324.86)"/>
+  <line class="cls-1" x1="36.17" y1="42.34" x2="44.17" y2="70.59"/>
+  <line class="cls-1" x1="292.92" y1="42.34" x2="287.68" y2="70.59"/>
+  <path class="cls-1" d="M401.14,395.45s34.39-26.21,94.91-5.58c0,0,12.88-3.18,2.67-16.09,0,0-33.42-24.9-94.44,2"
+  transform="translate(-113.29 -324.86)"/>
+  <text class="cls-2" transform="matrix(1.73, -0.28, 0.52, 0.85, 45.9, 95)">
+    D
+  </text>
+  <text class="cls-3" transform="matrix(2.04, 0, 0.07, 1, 88.33, 90.66)">
+    M
+  </text>
+  <text class="cls-4" transform="matrix(2.05, 0.07, -0.03, 1, 206.59, 87.36)">
+    S
+  </text>
+</svg>
