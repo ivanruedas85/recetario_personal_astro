@@ -1,0 +1,11 @@
+---
+import NavLinks from "../header_bar/NavLinks.astro";
+const today = new Date().getFullYear().toPrecision();
+---
+
+<p>
+    &copy;
+    <span>{today}</span>
+    <NavLinks href="/">Recetario Personal</NavLinks>. Todos los derechos
+    reservados.
+</p>
