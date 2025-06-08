@@ -2,13 +2,14 @@
 import NavLinks from "./NavLinks.astro";
 import SearchBar from "./SearchBar.astro";
 import Routes from "@data/routes.json";
+import { SITE_TITLE } from "@/consts";
 ---
 
 <header class="site-header">
     <div class="container header-container">
         <div class="logo">
             <NavLinks href="/" class="logo-link">
-                <span class="logo-text">Recetario</span>
+                <span class="logo-text">{SITE_TITLE}</span>
             </NavLinks>
         </div>
 
