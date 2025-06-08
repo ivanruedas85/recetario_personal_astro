@@ -1,7 +1,7 @@
 ---
 import CopyRight from "./CopyRight.astro";
 import Routes from "@data/routes.json";
-import Categorias from "@data/categorias.json";
+import { categorias } from "@/data/categorias.js";
 import NavLinks from "@headwer_bar/NavLinks.astro";
 ---
 
@@ -100,9 +100,9 @@ import NavLinks from "@headwer_bar/NavLinks.astro";
                 <ul class="footer-links">
                     <li>
                         {
-                            Categorias.map((category) => (
-                                <NavLinks href={category.url}>
-                                    {category.categoria}
+                            categorias.map((category) => (
+                                <NavLinks href={category.slug}>
+                                    {category.name}
                                 </NavLinks>
                             ))
                         }
