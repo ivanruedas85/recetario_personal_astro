@@ -2,6 +2,7 @@
 import NavBar from "@headwer_bar/Navbar.astro";
 import Footer from "@footer/Footer.astro";
 import BaseHeader from "@other/BaseHeader.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 
 export interface Props {
 	title: string;
@@ -14,7 +15,7 @@ const { title, description } = Astro.props;
 <!doctype html>
 <html lang="es">
 	<head>
-		<BaseHeader />
+		<BaseHeader title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<div class="site-container">
@@ -28,10 +29,18 @@ const { title, description } = Astro.props;
 </html>
 
 <style is:global>
+	@font-face {
+		font-family: Barista_Script;
+		src: url("/fonts/Barista_Script.otf");
+	}
+	@font-face {
+		font-family: bootstrap_icons;
+		src: url("/fonts/bootstrap_icons.woff");
+	}
 	:root {
 		/* New variables */
 		--fuente-1: "Barista Script";
-		--fuente-2: "Segoe UI" serif;
+		--fuente-2: "bootstrap icons" serif;
 		--first-color-light: #dabba0;
 		--second-color-light: #fff;
 		--main-color: #e21e0b;
