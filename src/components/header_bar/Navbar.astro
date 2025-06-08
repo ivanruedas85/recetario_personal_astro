@@ -221,10 +221,26 @@ import { SITE_TITLE } from "@/consts";
         transform: translateY(-8px) rotate(-45deg);
     }
 
+    @media (max-width: 1061px) {
+        .logo-icon {
+            display: none;
+        }
+        .logo-text {
+            margin-left: 0;
+        }
+    }
     @media (max-width: 768px) {
         .mobile-menu-toggle {
             display: block;
             order: 3;
+        }
+
+        .logo-icon {
+            display: flex;
+        }
+
+        .logo-text {
+            display: none;
         }
 
         .nav-links {
