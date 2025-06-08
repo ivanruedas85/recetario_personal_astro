@@ -1,0 +1,321 @@
+---
+import Layout from "@layouts/Layout.astro";
+import RecipeGrid from "@recipes/RecipeGrid.astro";
+import { recipes } from "@data/recipes";
+import { categorias } from "@data/categorias";
+
+const pageTitle = "Todas las Recetas";
+const description =
+    "Explora nuestra colección completa de recetas, ordenadas por popularidad, dificultad y tiempo de preparación.";
+
+// Get all unique difficulty levels
+const difficultyLevels = [
+    ...new Set(recipes.map((recipe) => recipe.difficulty)),
+];
+---
+
+<Layout title={pageTitle} description={description}>
+    <div class="recipes-header">
+        <h1>Todas las Recetas</h1>
+        <p>
+            Explora nuestra colección de recetas caseras para todas las
+            ocasiones.
+        </p>
+    </div>
+
+    <div class="filters-container">
+        <div class="filter-section">
+            <h3>Filtrar por:</h3>
+
+            <div class="filter-group">
+                <h4>Categoría</h4>
+                <div class="filter-options">
+                    <button
+                        class="filter-option active"
+                        data-filter="category"
+                        data-value="all">Todas</button
+                    >
+                    {
+                        categorias.map((category) => (
+                            <button
+                                class="filter-option"
+                                data-filter="category"
+                                data-value={category.slug}
+                            >
+                                {category.name}
+                            </button>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h4>Dificultad</h4>
+                <div class="filter-options">
+                    <button
+                        class="filter-option active"
+                        data-filter="difficulty"
+                        data-value="all">Todas</button
+                    >
+                    {
+                        difficultyLevels.map((level) => (
+                            <button
+                                class="filter-option"
+                                data-filter="difficulty"
+                                data-value={level}
+                            >
+                                {level.charAt(0).toUpperCase() + level.slice(1)}
+                            </button>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h4>Tiempo de preparación</h4>
+                <div class="filter-options">
+                    <button
+                        class="filter-option active"
+                        data-filter="time"
+                        data-value="all">Todos</button
+                    >
+                    <button
+                        class="filter-option"
+                        data-filter="time"
+                        data-value="quick">Rápido (< 30 min)</button
+                    >
+                    <button
+                        class="filter-option"
+                        data-filter="time"
+                        data-value="medium">Medio (30-60 min)</button
+                    >
+                    <button
+                        class="filter-option"
+                        data-filter="time"
+                        data-value="long">Largo (> 60 min)</button
+                    >
+                </div>
+            </div>
+        </div>
+
+        <div class="recipe-count">
+            <span id="recipe-count">{recipes.length}</span> recetas encontradas
+        </div>
+    </div>
+
+    <div id="recipes-container">
+        <RecipeGrid />
+    </div>
+</Layout>
+
+<script>
+    // Filter functionality
+    document.addEventListener("DOMContentLoaded", () => {
+        const filterOptions = document.querySelectorAll(".filter-option");
+        const recipesContainer = document.getElementById("recipes-container");
+        const recipeCountElement = document.getElementById("recipe-count");
+
+        // Initial data
+        const allRecipeCards = document.querySelectorAll(".recipe-card");
+        let visibleCount = allRecipeCards.length;
+
+        // Current filter state
+        const currentFilters = {
+            category: "all",
+            difficulty: "all",
+            time: "all",
+        };
+
+        // Update count display
+        const updateCount = (count) => {
+            if (recipeCountElement) {
+                recipeCountElement.textContent = count.toString();
+            }
+        };
+
+        // Filter recipes based on current filters
+        const applyFilters = () => {
+            let visibleRecipes = 0;
+
+            allRecipeCards.forEach((card) => {
+                const category =
+                    card
+                        .querySelector(".recipe-category")
+                        ?.textContent?.toLowerCase() || "";
+                const difficulty =
+                    card
+                        .querySelector(".meta-item:nth-child(2) span")
+                        ?.textContent?.toLowerCase() || "";
+                const timeText =
+                    card.querySelector(".meta-item:nth-child(1) span")
+                        ?.textContent || "";
+                const time = parseInt(timeText);
+
+                let showCategory =
+                    currentFilters.category === "all" ||
+                    category.includes(currentFilters.category);
+
+                let showDifficulty =
+                    currentFilters.difficulty === "all" ||
+                    difficulty === currentFilters.difficulty;
+
+                let showTime =
+                    currentFilters.time === "all" ||
+                    (currentFilters.time === "quick" && time < 30) ||
+                    (currentFilters.time === "medium" &&
+                        time >= 30 &&
+                        time <= 60) ||
+                    (currentFilters.time === "long" && time > 60);
+
+                if (showCategory && showDifficulty && showTime) {
+                    card.style.display = "";
+                    visibleRecipes++;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            updateCount(visibleRecipes);
+
+            // Show "no results" message if needed
+            const noResultsEl = document.querySelector(".no-results");
+            if (visibleRecipes === 0) {
+                if (!noResultsEl) {
+                    const message = document.createElement("div");
+                    message.className = "no-results";
+                    message.innerHTML =
+                        "<p>No se encontraron recetas con los filtros seleccionados.</p>";
+                    recipesContainer?.appendChild(message);
+                }
+            } else if (noResultsEl) {
+                noResultsEl.remove();
+            }
+        };
+
+        // Handle filter clicks
+        filterOptions.forEach((option) => {
+            option.addEventListener("click", () => {
+                const filterType = option.getAttribute("data-filter");
+                const filterValue = option.getAttribute("data-value");
+
+                if (filterType && filterValue) {
+                    // Update active button in this filter group
+                    const filterGroup = option.closest(".filter-group");
+                    filterGroup
+                        ?.querySelectorAll(".filter-option")
+                        .forEach((btn) => {
+                            btn.classList.remove("active");
+                        });
+                    option.classList.add("active");
+
+                    // Update current filters
+                    currentFilters[filterType] = filterValue;
+
+                    // Apply filters
+                    applyFilters();
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    .recipes-header {
+        text-align: center;
+        margin-bottom: var(--space-5);
+    }
+
+    .recipes-header h1 {
+        margin-bottom: var(--space-2);
+    }
+
+    .recipes-header p {
+        font-size: 1.1rem;
+        color: var(--color-neutral-600);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .filters-container {
+        margin-bottom: var(--space-5);
+        padding: var(--space-4);
+        background-color: var(--color-neutral-100);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .filter-section h3 {
+        margin-bottom: var(--space-3);
+        font-size: 1.2rem;
+    }
+
+    .filter-group {
+        margin-bottom: var(--space-3);
+    }
+
+    .filter-group h4 {
+        margin-bottom: var(--space-2);
+        font-size: 1rem;
+        color: var(--color-neutral-700);
+    }
+
+    .filter-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+    }
+
+    .filter-option {
+        background-color: var(--color-neutral-200);
+        color: var(--color-neutral-700);
+        border: none;
+        border-radius: var(--border-radius-md);
+        padding: var(--space-1) var(--space-2);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        font-size: 0.9rem;
+    }
+
+    .filter-option:hover {
+        background-color: var(--color-neutral-300);
+        transform: none;
+    }
+
+    .filter-option.active {
+        background-color: var(--color-primary-500);
+        color: white;
+    }
+
+    .recipe-count {
+        margin-top: var(--space-3);
+        padding-top: var(--space-3);
+        border-top: 1px solid var(--color-neutral-300);
+        font-size: 0.9rem;
+        color: var(--color-neutral-600);
+    }
+
+    .recipe-count span {
+        font-weight: 600;
+        color: var(--color-primary-600);
+    }
+
+    .no-results {
+        text-align: center;
+        padding: var(--space-5);
+        background-color: var(--color-neutral-200);
+        border-radius: var(--border-radius-lg);
+        margin-top: var(--space-4);
+    }
+
+    @media (max-width: 768px) {
+        .filter-options {
+            flex-direction: column;
+            gap: var(--space-1);
+        }
+
+        .filter-option {
+            width: 100%;
+            text-align: left;
+        }
+    }
+</style>
