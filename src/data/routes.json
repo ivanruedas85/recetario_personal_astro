@@ -5,14 +5,14 @@
     },
     {
         "name": "Recetas",
-        "url": "/recetas"
+        "url": "/recipes"
     },
     {
         "name": "Categorías",
-        "url": "/categorias"
+        "url": "/categories"
     },
     {
         "name": "Acerca de",
-        "url": "/acercade"
+        "url": "/about"
     }
 ]
