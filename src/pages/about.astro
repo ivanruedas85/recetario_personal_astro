@@ -32,15 +32,21 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
                 <a href="/about" class="btn">Conoce más</a>
             </div>
             <div class="about-image">
-                <img
-                    src="https://images.pexels.com/photos/4258186/pexels-photo-4258186.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                    alt="Cocinando juntos"
-                    loading="lazy"
-                />
+                <figure>
+                    <img
+                        src="/portada_tere.webp"
+                        alt="Portada de Teresa Gonzalez Torres"
+                        loading="lazy"
+                    />
+                    <figcaption>
+                        En memoria de Teresa Gonzalez Torres. 1939-2019
+                    </figcaption>
+                </figure>
             </div>
         </div>
     </section>
 
+    <!--
     <section class="newsletter-section">
         <div class="newsletter-container">
             <div class="newsletter-content">
@@ -61,6 +67,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
             </div>
         </div>
     </section>
+    -->
 </Layout>
 
 <style>
@@ -122,7 +129,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
     .about-image:hover img {
         transform: scale(1.05);
     }
-
+    /*
     .newsletter-section {
         margin: var(--space-7) 0;
     }
@@ -171,7 +178,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
     .newsletter-form button:hover {
         background-color: var(--color-accent-500);
     }
-
+    */
     @media (max-width: 768px) {
         .about-content {
             grid-template-columns: 1fr;
@@ -181,7 +188,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
             order: -1;
             height: 300px;
         }
-
+        /*
         .newsletter-form {
             flex-direction: column;
         }
@@ -190,5 +197,6 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
         .newsletter-form button {
             width: 100%;
         }
+        */
     }
 </style>
