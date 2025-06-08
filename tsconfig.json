@@ -37,6 +37,12 @@
       ],
       "@pages/*": [
         "src/pages/*"
+      ],
+      "@recipes/*": [
+        "src/components/recipes/*"
+      ],
+      "@lists/*": [
+        "src/components/lists/*"
       ]
     }
   }
