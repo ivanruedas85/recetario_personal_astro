@@ -1,26 +1,253 @@
 ---
+import NavBar from "../components/header_bar/Navbar.astro";
+import Footer from "../components/footer/Footer.astro";
 import BaseHeader from "../components/other/BaseHeader.astro";
-import Navbar from "../components/header_bar/Navbar.astro";
-import Footer from "../components/Footer/Footer.astro";
+
+export interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<BaseHeader />
 	</head>
 	<body>
-		<Navbar />
-		<slot />
-		<Footer />
+		<div class="site-container">
+			<NavBar />
+			<main>
+				<slot />
+			</main>
+			<Footer />
+		</div>
 	</body>
 </html>
 
-<style>
+<style is:global>
+	:root {
+		/* New variables */
+		--fuente-1: "Barista Script";
+		--fuente-2: "Segoe UI" serif;
+		--first-color-light: #dabba0;
+		--second-color-light: #fff;
+		--main-color: #e21e0b;
+		--black: #120906;
+		--black2: #422f27;
+		--border: 0.1rem solid rgba(255, 255, 255, 0.3);
+		--bgimage: url("/img/cocina.jpg");
+		--bg: linear-gradient(90deg, transparent, #000);
+		--bg2: linear-gradient(transparent, #000);
+		--shadow: 4px 45px 18px -19px rgba(0, 0, 0, 0.11);
+		--shadow2: 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+			22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+			100px 100px 80px rgba(0, 0, 0, 0.07);
+		--gradient: linear-gradient(315deg, #dabba0, #e21e0b);
+
+		/* Color system - updated with new colors */
+		--color-primary-100: var(--first-color-light);
+		--color-primary-200: #e8d1bf;
+		--color-primary-300: #e4c1a6;
+		--color-primary-400: #dfb08d;
+		--color-primary-500: var(--main-color);
+		--color-primary-600: #c91b0a;
+		--color-primary-700: #b01808;
+
+		--color-secondary-100: #e3ede8;
+		--color-secondary-200: #c4dbd0;
+		--color-secondary-300: #a3c7b9;
+		--color-secondary-400: #81b29a;
+		--color-secondary-500: #6a9b83;
+		--color-secondary-600: #52806a;
+		--color-secondary-700: #3c6351;
+
+		--color-accent-100: var(--first-color-light);
+		--color-accent-200: #e8d1bf;
+		--color-accent-300: #e4c1a6;
+		--color-accent-400: #dfb08d;
+		--color-accent-500: #dabba0;
+		--color-accent-600: #d6a858;
+		--color-accent-700: #b88a3e;
+
+		--color-neutral-100: var(--second-color-light);
+		--color-neutral-200: #f7f7f7;
+		--color-neutral-300: #e5e5e5;
+		--color-neutral-400: #d4d4d4;
+		--color-neutral-500: #a3a3a3;
+		--color-neutral-600: #737373;
+		--color-neutral-700: #525252;
+		--color-neutral-800: var(--black);
+		--color-neutral-900: var(--black2);
+
+		--color-success: #4caf50;
+		--color-warning: #ff9800;
+		--color-error: #f44336;
+
+		/* Typography */
+		--font-heading: var(--fuente-1);
+		--font-body: var(--fuente-2);
+
+		/* Spacing system */
+		--space-1: 0.25rem;
+		--space-2: 0.5rem;
+		--space-3: 1rem;
+		--space-4: 1.5rem;
+		--space-5: 2rem;
+		--space-6: 3rem;
+		--space-7: 4rem;
+
+		/* Other variables */
+		--border-radius-sm: 4px;
+		--border-radius-md: 8px;
+		--border-radius-lg: 16px;
+		--shadow-sm: var(--shadow);
+		--shadow-md: var(--shadow2);
+		--shadow-lg: var(--shadow2);
+		--transition-fast: 0.2s ease;
+		--transition-normal: 0.3s ease;
+		--max-width: 1200px;
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
 	html,
 	body {
-		margin: 0;
+		font-family: var(--font-body);
+		color: var(--color-neutral-800);
+		line-height: 1.5;
+		background-color: var(--color-neutral-100);
+		min-height: 100%;
 		width: 100%;
-		height: 100%;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: var(--font-heading);
+		line-height: 1.2;
+		font-weight: 600;
+		margin-bottom: var(--space-3);
+		color: var(--color-neutral-900);
+	}
+
+	h1 {
+		font-size: 2.5rem;
+	}
+
+	h2 {
+		font-size: 2rem;
+	}
+
+	h3 {
+		font-size: 1.5rem;
+	}
+
+	p {
+		margin-bottom: var(--space-3);
+	}
+
+	a {
+		color: var(--color-primary-600);
+		text-decoration: none;
+		transition: color var(--transition-fast);
+	}
+
+	a:hover {
+		color: var(--color-primary-700);
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	button,
+	.btn {
+		display: inline-block;
+		padding: var(--space-2) var(--space-3);
+		background: var(--gradient);
+		color: var(--second-color-light);
+		border: none;
+		border-radius: var(--border-radius-md);
+		font-family: var(--font-body);
+		font-weight: 500;
+		cursor: pointer;
+		text-decoration: none;
+		transition: transform var(--transition-fast);
+	}
+
+	button:hover,
+	.btn:hover {
+		transform: translateY(-2px);
+	}
+
+	.site-container {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+		background-image: var(--bgimage);
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
+	}
+
+	main {
+		flex: 1;
+		padding: var(--space-4) var(--space-3);
+		max-width: var(--max-width);
+		margin: 0 auto;
+		width: 100%;
+		position: relative;
+	}
+
+	main::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: var(--bg);
+		z-index: -1;
+	}
+
+	.container {
+		width: 100%;
+		max-width: var(--max-width);
+		margin: 0 auto;
+		padding: 0 var(--space-3);
+	}
+
+	.btn-secondary {
+		background: var(--gradient);
+	}
+
+	.btn-accent {
+		background: var(--gradient);
+		color: var(--second-color-light);
+	}
+
+	@media (max-width: 768px) {
+		h1 {
+			font-size: 2rem;
+		}
+
+		h2 {
+			font-size: 1.75rem;
+		}
+
+		h3 {
+			font-size: 1.25rem;
+		}
 	}
 </style>
