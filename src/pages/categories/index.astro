@@ -1,0 +1,245 @@
+---
+import Layout from "@layouts/Layout.astro";
+import CategoryList from "@lists/CategoryList.astro";
+
+const pageTitle = "Categorías de Recetas";
+const description =
+    "Explora nuestras recetas por categorías: desayunos, comidas, cenas, postres, aperitivos y más.";
+---
+
+<Layout title={pageTitle} description={description}>
+    <div class="categories-page">
+        <h1>Categorías de Recetas</h1>
+        <p class="page-description">
+            Explora nuestras recetas organizadas por categorías para encontrar
+            fácilmente lo que buscas.
+        </p>
+
+        <CategoryList />
+
+        <section class="dietary-preferences">
+            <h2>Preferencias Dietéticas</h2>
+            <div class="dietary-grid">
+                <a href="/categories/vegetariana" class="dietary-item">
+                    <div class="dietary-icon">🥗</div>
+                    <h3>Vegetarianas</h3>
+                    <p>Deliciosas recetas sin carne</p>
+                </a>
+
+                <a href="/categories/vegana" class="dietary-item">
+                    <div class="dietary-icon">🌱</div>
+                    <h3>Veganas</h3>
+                    <p>Platos sin productos animales</p>
+                </a>
+
+                <a href="/categories/sin-gluten" class="dietary-item">
+                    <div class="dietary-icon">🌾</div>
+                    <h3>Sin Gluten</h3>
+                    <p>Recetas para celíacos</p>
+                </a>
+
+                <a href="/categories/sin-lactosa" class="dietary-item">
+                    <div class="dietary-icon">🥛</div>
+                    <h3>Sin Lactosa</h3>
+                    <p>Para intolerantes a la lactosa</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="cuisines">
+            <h2>Cocinas del Mundo</h2>
+            <div class="cuisines-grid">
+                <a href="/categories/mediterranea" class="cuisine-item">
+                    <img
+                        src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        alt="Cocina Mediterránea"
+                        loading="lazy"
+                    />
+                    <div class="cuisine-overlay">
+                        <h3>Mediterránea</h3>
+                    </div>
+                </a>
+
+                <a href="/categories/asiatica" class="cuisine-item">
+                    <img
+                        src="https://images.pexels.com/photos/1731535/pexels-photo-1731535.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        alt="Cocina Asiática"
+                        loading="lazy"
+                    />
+                    <div class="cuisine-overlay">
+                        <h3>Asiática</h3>
+                    </div>
+                </a>
+
+                <a href="/categories/latinoamericana" class="cuisine-item">
+                    <img
+                        src="https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        alt="Cocina Latinoamericana"
+                        loading="lazy"
+                    />
+                    <div class="cuisine-overlay">
+                        <h3>Latinoamericana</h3>
+                    </div>
+                </a>
+
+                <a href="/categories/americana" class="cuisine-item">
+                    <img
+                        src="https://images.pexels.com/photos/2983101/pexels-photo-2983101.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        alt="Cocina Americana"
+                        loading="lazy"
+                    />
+                    <div class="cuisine-overlay">
+                        <h3>Americana</h3>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </div>
+</Layout>
+
+<style>
+    .categories-page {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: var(--space-2);
+    }
+
+    .page-description {
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto var(--space-5);
+        color: var(--color-neutral-600);
+    }
+
+    h2 {
+        margin: var(--space-6) 0 var(--space-4);
+        position: relative;
+        display: inline-block;
+    }
+
+    h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background-color: var(--color-primary-500);
+    }
+
+    .dietary-preferences {
+        margin: var(--space-6) 0;
+    }
+
+    .dietary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: var(--space-4);
+    }
+
+    .dietary-item {
+        background-color: white;
+        border-radius: var(--border-radius-lg);
+        padding: var(--space-4);
+        text-align: center;
+        text-decoration: none;
+        color: inherit;
+        box-shadow: var(--shadow-sm);
+        transition:
+            transform var(--transition-normal),
+            box-shadow var(--transition-normal);
+    }
+
+    .dietary-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .dietary-icon {
+        font-size: 2.5rem;
+        margin-bottom: var(--space-2);
+    }
+
+    .dietary-item h3 {
+        margin-bottom: var(--space-1);
+        color: var(--color-neutral-800);
+    }
+
+    .dietary-item p {
+        font-size: 0.9rem;
+        color: var(--color-neutral-600);
+        margin: 0;
+    }
+
+    .cuisines-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: var(--space-4);
+    }
+
+    .cuisine-item {
+        position: relative;
+        height: 200px;
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        transition:
+            transform var(--transition-normal),
+            box-shadow var(--transition-normal);
+    }
+
+    .cuisine-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .cuisine-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform var(--transition-normal);
+    }
+
+    .cuisine-item:hover img {
+        transform: scale(1.1);
+    }
+
+    .cuisine-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: var(--space-3);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        color: white;
+    }
+
+    .cuisine-overlay h3 {
+        margin: 0;
+        font-size: 1.2rem;
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        .dietary-grid,
+        .cuisines-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-3);
+        }
+
+        .cuisine-item {
+            height: 150px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .dietary-grid,
+        .cuisines-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

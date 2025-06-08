@@ -1,0 +1,111 @@
+---
+import Layout from "@layouts/Layout.astro";
+import RecipeGrid from "@recipes/RecipeGrid.astro";
+import { categorias } from "@data/categorias";
+import { recipes } from "@data/recipes";
+
+export function getStaticPaths() {
+    return categorias.map((category) => ({
+        params: { slug: category.slug },
+        props: { category },
+    }));
+}
+
+const { category } = Astro.props;
+
+// Get recipes for this category
+const categoryRecipes = recipes.filter(
+    (recipe) => recipe.category.toLowerCase() === category.name.toLowerCase(),
+);
+---
+
+<Layout
+    title={category.name}
+    description={`Explora nuestras recetas de ${category.name.toLowerCase()}: deliciosas y fáciles de preparar.`}
+>
+    <div class="category-page">
+        <div
+            class="category-header"
+            style={`background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${category.image})`}
+        >
+            <h1>{category.name}</h1>
+            <p>{category.count} recetas para disfrutar</p>
+        </div>
+
+        <div class="category-description">
+            <p>
+                Explora nuestra colección de recetas de {
+                    category.name.toLowerCase()
+                }, desde opciones rápidas para el día a día hasta elaboraciones
+                más complejas para ocasiones especiales.
+            </p>
+        </div>
+
+        <div class="recipes-container">
+            <RecipeGrid
+                title={`Recetas de ${category.name}`}
+                category={category.name}
+            />
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .category-page {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .category-header {
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        background-size: cover;
+        background-position: center;
+        border-radius: var(--border-radius-lg);
+        margin-bottom: var(--space-5);
+        position: relative;
+    }
+
+    .category-header h1 {
+        font-size: 2.5rem;
+        margin-bottom: var(--space-2);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .category-header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .category-description {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto var(--space-5);
+        font-size: 1.1rem;
+        color: var(--color-neutral-600);
+    }
+
+    .recipes-container {
+        margin-bottom: var(--space-6);
+    }
+
+    @media (max-width: 768px) {
+        .category-header {
+            height: 200px;
+        }
+
+        .category-header h1 {
+            font-size: 2rem;
+        }
+
+        .category-header p {
+            font-size: 1rem;
+        }
+    }
+</style>

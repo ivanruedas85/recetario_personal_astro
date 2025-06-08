@@ -1,0 +1,207 @@
+---
+interface Props {
+    id: string;
+    title: string;
+    image: string;
+    time: number;
+    difficulty: string;
+    rating: number;
+    category: string;
+}
+
+const { id, title, image, time, difficulty, rating, category } = Astro.props;
+
+// Format the difficulty string to capitalize first letter
+const formattedDifficulty =
+    difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+
+// Generate star rating
+const fullStars = Math.floor(rating);
+const hasHalfStar = rating % 1 >= 0.5;
+const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+---
+
+<div class="recipe-card">
+    <a href={`/recipes/${id}`} class="recipe-link">
+        <div class="recipe-image">
+            <img src={image} alt={title} loading="lazy" />
+            <div class="recipe-category">{category}</div>
+        </div>
+
+        <div class="recipe-content">
+            <h3 class="recipe-title">{title}</h3>
+
+            <div class="recipe-meta">
+                <div class="meta-item">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <span>{time} min</span>
+                </div>
+
+                <div class="meta-item">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path
+                            d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                        ></path>
+                    </svg>
+                    <span>{formattedDifficulty}</span>
+                </div>
+            </div>
+
+            <div class="recipe-rating">
+                {
+                    Array(fullStars)
+                        .fill()
+                        .map(() => <span class="star filled">★</span>)
+                }
+
+                {hasHalfStar && <span class="star half">★</span>}
+
+                {
+                    Array(emptyStars)
+                        .fill()
+                        .map(() => <span class="star">★</span>)
+                }
+
+                <span class="rating-text">{rating.toFixed(1)}</span>
+            </div>
+        </div>
+    </a>
+</div>
+
+<style>
+    .recipe-card {
+        background-color: white;
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        transition:
+            transform var(--transition-normal),
+            box-shadow var(--transition-normal);
+    }
+
+    .recipe-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .recipe-link {
+        display: block;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .recipe-image {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .recipe-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform var(--transition-normal);
+    }
+
+    .recipe-card:hover .recipe-image img {
+        transform: scale(1.05);
+    }
+
+    .recipe-category {
+        position: absolute;
+        top: var(--space-2);
+        right: var(--space-2);
+        background-color: var(--color-accent-400);
+        color: var(--color-neutral-800);
+        padding: 4px var(--space-2);
+        border-radius: var(--border-radius-md);
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .recipe-content {
+        padding: var(--space-3);
+    }
+
+    .recipe-title {
+        font-size: 1.2rem;
+        margin-bottom: var(--space-2);
+        color: var(--color-neutral-900);
+        font-weight: 600;
+        /* For title overflow with ellipsis */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .recipe-meta {
+        display: flex;
+        gap: var(--space-3);
+        margin-bottom: var(--space-2);
+        color: var(--color-neutral-600);
+        font-size: 0.9rem;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .recipe-rating {
+        display: flex;
+        align-items: center;
+    }
+
+    .star {
+        color: var(--color-neutral-300);
+        font-size: 1.1rem;
+    }
+
+    .star.filled {
+        color: var(--color-accent-500);
+    }
+
+    .star.half {
+        position: relative;
+        color: var(--color-neutral-300);
+    }
+
+    .star.half::before {
+        content: "★";
+        position: absolute;
+        color: var(--color-accent-500);
+        width: 50%;
+        overflow: hidden;
+    }
+
+    .rating-text {
+        margin-left: var(--space-1);
+        font-size: 0.9rem;
+        color: var(--color-neutral-600);
+    }
+</style>

@@ -1,0 +1,104 @@
+---
+import RecipeCard from "./RecipesCard.astro";
+import { recipes } from "@data/recipes";
+
+interface Props {
+    title?: string;
+    category?: string;
+    featured?: boolean;
+    limit?: number;
+}
+
+const { title, category, featured = false, limit } = Astro.props;
+
+// Filter recipes based on props
+let filteredRecipes = [...recipes];
+
+if (category) {
+    filteredRecipes = filteredRecipes.filter(
+        (recipe) => recipe.category.toLowerCase() === category.toLowerCase(),
+    );
+}
+
+if (featured) {
+    filteredRecipes = filteredRecipes.filter((recipe) => recipe.featured);
+}
+
+// Limit the number of recipes shown if specified
+if (limit && limit > 0) {
+    filteredRecipes = filteredRecipes.slice(0, limit);
+}
+---
+
+<section class="recipe-grid-section">
+    {title && <h2 class="section-title">{title}</h2>}
+
+    <div class="recipe-grid">
+        {
+            filteredRecipes.map((recipe) => (
+                <RecipeCard
+                    id={recipe.id}
+                    title={recipe.title}
+                    image={recipe.image}
+                    time={recipe.cookingTime}
+                    difficulty={recipe.difficulty}
+                    rating={recipe.rating}
+                    category={recipe.category}
+                />
+            ))
+        }
+    </div>
+
+    {
+        filteredRecipes.length === 0 && (
+            <div class="no-recipes">
+                <p>
+                    No se encontraron recetas
+                    {category ? ` en la categoría ${category}` : ""}.
+                </p>
+            </div>
+        )
+    }
+</section>
+
+<style>
+    .recipe-grid-section {
+        margin-bottom: var(--space-6);
+    }
+
+    .section-title {
+        margin-bottom: var(--space-4);
+        position: relative;
+        display: inline-block;
+    }
+
+    .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background-color: var(--color-primary-500);
+    }
+
+    .recipe-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--space-4);
+    }
+
+    .no-recipes {
+        text-align: center;
+        padding: var(--space-5);
+        background-color: var(--color-neutral-100);
+        border-radius: var(--border-radius-lg);
+    }
+
+    @media (max-width: 768px) {
+        .recipe-grid {
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: var(--space-3);
+        }
+    }
+</style>

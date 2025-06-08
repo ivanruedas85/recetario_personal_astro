@@ -1,0 +1,62 @@
+---
+import RecipeGrid from "./RecipeGrid.astro";
+---
+
+<section class="featured-recipes">
+    <div class="section-header">
+        <h2 class="section-title">Recetas Destacadas</h2>
+        <a href="/recipes" class="view-all">Ver todas</a>
+    </div>
+
+    <RecipeGrid featured={true} limit={4} />
+</section>
+
+<style>
+    .featured-recipes {
+        margin: var(--space-6) 0;
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-4);
+    }
+
+    .section-title {
+        margin-bottom: 0;
+        position: relative;
+    }
+
+    .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background-color: var(--color-primary-500);
+    }
+
+    .view-all {
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        color: var(--color-primary-600);
+        transition: color var(--transition-fast);
+    }
+
+    .view-all::after {
+        content: "→";
+        margin-left: var(--space-1);
+        transition: transform var(--transition-fast);
+    }
+
+    .view-all:hover {
+        color: var(--color-primary-700);
+    }
+
+    .view-all:hover::after {
+        transform: translateX(4px);
+    }
+</style>

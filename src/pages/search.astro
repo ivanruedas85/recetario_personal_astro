@@ -1,0 +1,211 @@
+---
+import Layout from "@layouts/Layout.astro";
+import RecipeCard from "@recipes/RecipesCard.astro";
+import { recipes } from "@data/recipes";
+
+// Get the search query from URL
+const query = Astro.url.searchParams.get("q") || "";
+
+// Filter recipes based on search query
+const searchResults = query
+    ? recipes.filter((recipe) => {
+          const searchLower = query.toLowerCase();
+          return (
+              recipe.title.toLowerCase().includes(searchLower) ||
+              recipe.description.toLowerCase().includes(searchLower) ||
+              recipe.ingredients.some((ingredient) =>
+                  ingredient.toLowerCase().includes(searchLower),
+              ) ||
+              recipe.tags?.some((tag) =>
+                  tag.toLowerCase().includes(searchLower),
+              )
+          );
+      })
+    : [];
+
+const pageTitle = `Búsqueda: ${query}`;
+const description = `Resultados de búsqueda para "${query}" en nuestro recetario online.`;
+---
+
+<Layout title={pageTitle} description={description}>
+    <div class="search-results-page">
+        <div class="search-header">
+            <h1>Resultados de búsqueda</h1>
+            <div class="search-query">
+                <p>
+                    Mostrando resultados para: <span class="highlight"
+                        >{query}</span>
+                </p>
+                <p class="results-count">
+                    {searchResults.length} recetas encontradas
+                </p>
+            </div>
+
+            <form class="search-form">
+                <input
+                    type="text"
+                    name="q"
+                    value={query}
+                    placeholder="Buscar recetas..."
+                    aria-label="Buscar recetas"
+                />
+                <button type="submit" class="btn">Buscar</button>
+            </form>
+        </div>
+
+        {
+            searchResults.length > 0 ? (
+                <div class="recipe-grid">
+                    {searchResults.map((recipe) => (
+                        <RecipeCard
+                            id={recipe.id}
+                            title={recipe.title}
+                            image={recipe.image}
+                            time={recipe.cookingTime}
+                            difficulty={recipe.difficulty}
+                            rating={recipe.rating}
+                            category={recipe.category}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <div class="no-results">
+                    <div class="no-results-icon">🔍</div>
+                    <h2>No se encontraron recetas</h2>
+                    <p>
+                        Lo sentimos, no encontramos recetas que coincidan con "
+                        {query}".
+                    </p>
+                    <div class="suggestions">
+                        <h3>Sugerencias:</h3>
+                        <ul>
+                            <li>Verifica la ortografía de tu búsqueda</li>
+                            <li>Prueba con palabras más generales</li>
+                            <li>
+                                Busca por ingrediente principal o tipo de cocina
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="/recipes" class="btn btn-primary">
+                        Ver todas las recetas
+                    </a>
+                </div>
+            )
+        }
+    </div>
+</Layout>
+
+<style>
+    .search-results-page {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .search-header {
+        margin-bottom: var(--space-5);
+    }
+
+    .search-header h1 {
+        margin-bottom: var(--space-3);
+    }
+
+    .search-query {
+        margin-bottom: var(--space-3);
+    }
+
+    .highlight {
+        background-color: var(--color-accent-200);
+        padding: 2px var(--space-1);
+        border-radius: var(--border-radius-sm);
+        font-weight: 500;
+    }
+
+    .results-count {
+        font-size: 0.9rem;
+        color: var(--color-neutral-600);
+        margin-top: var(--space-1);
+    }
+
+    .search-form {
+        display: flex;
+        gap: var(--space-2);
+        margin-top: var(--space-3);
+    }
+
+    .search-form input {
+        flex: 1;
+        padding: var(--space-2) var(--space-3);
+        border: 2px solid var(--color-neutral-300);
+        border-radius: var(--border-radius-md);
+        font-family: var(--font-body);
+        font-size: 1rem;
+        transition:
+            border-color var(--transition-fast),
+            box-shadow var(--transition-fast);
+    }
+
+    .search-form input:focus {
+        outline: none;
+        border-color: var(--color-primary-400);
+        box-shadow: 0 0 0 3px rgba(224, 122, 95, 0.2);
+    }
+
+    .recipe-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--space-4);
+    }
+
+    .no-results {
+        text-align: center;
+        padding: var(--space-6) var(--space-4);
+        background-color: var(--color-neutral-100);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .no-results-icon {
+        font-size: 3rem;
+        margin-bottom: var(--space-3);
+    }
+
+    .no-results h2 {
+        margin-bottom: var(--space-3);
+    }
+
+    .no-results p {
+        color: var(--color-neutral-600);
+        margin-bottom: var(--space-4);
+    }
+
+    .suggestions {
+        max-width: 400px;
+        margin: 0 auto var(--space-4);
+        text-align: left;
+    }
+
+    .suggestions h3 {
+        font-size: 1.1rem;
+        margin-bottom: var(--space-2);
+    }
+
+    .suggestions ul {
+        padding-left: var(--space-4);
+    }
+
+    .suggestions li {
+        margin-bottom: var(--space-1);
+        color: var(--color-neutral-700);
+    }
+
+    @media (max-width: 768px) {
+        .search-form {
+            flex-direction: column;
+        }
+
+        .recipe-grid {
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: var(--space-3);
+        }
+    }
+</style>

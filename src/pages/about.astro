@@ -1,0 +1,194 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Hero from "@hero_bars/HeroIndexBar.astro";
+import FeaturedRecipes from "@recipes/FeaturedRecipes.astro";
+import CategoryList from "@lists/CategoryList.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+    <Hero />
+
+    <section class="categories-section">
+        <h2 class="section-title">Explora por Categorías</h2>
+        <CategoryList />
+    </section>
+
+    <FeaturedRecipes />
+
+    <section class="about-section">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Sobre Recetario Online</h2>
+                <p>
+                    Bienvenido a nuestro rincón culinario, donde compartimos
+                    recetas tradicionales y modernas para todos los gustos.
+                </p>
+                <p>
+                    Nuestra misión es inspirar a personas de todas las edades y
+                    niveles de habilidad a disfrutar de la cocina casera, con
+                    recetas sencillas, nutritivas y llenas de sabor.
+                </p>
+                <a href="/about" class="btn">Conoce más</a>
+            </div>
+            <div class="about-image">
+                <img
+                    src="https://images.pexels.com/photos/4258186/pexels-photo-4258186.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                    alt="Cocinando juntos"
+                    loading="lazy"
+                />
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter-section">
+        <div class="newsletter-container">
+            <div class="newsletter-content">
+                <h2>¡No te pierdas ninguna receta!</h2>
+                <p>
+                    Suscríbete a nuestro boletín para recibir las últimas
+                    recetas y consejos culinarios directamente en tu bandeja de
+                    entrada.
+                </p>
+                <form class="newsletter-form">
+                    <input
+                        type="email"
+                        placeholder="Tu correo electrónico"
+                        required
+                    />
+                    <button type="submit" class="btn">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .section-title {
+        margin-bottom: var(--space-4);
+        position: relative;
+        display: inline-block;
+    }
+
+    .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background-color: var(--color-primary-500);
+    }
+
+    .categories-section {
+        margin: var(--space-6) 0;
+    }
+
+    .about-section {
+        margin: var(--space-7) 0;
+        padding: var(--space-5) 0;
+        background-color: var(--color-neutral-200);
+        border-radius: var(--border-radius-lg);
+    }
+
+    .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-5);
+        align-items: center;
+    }
+
+    .about-text {
+        padding: var(--space-4);
+    }
+
+    .about-text p {
+        margin-bottom: var(--space-3);
+    }
+
+    .about-image {
+        height: 100%;
+        overflow: hidden;
+        border-radius: var(--border-radius-lg);
+    }
+
+    .about-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform var(--transition-normal);
+    }
+
+    .about-image:hover img {
+        transform: scale(1.05);
+    }
+
+    .newsletter-section {
+        margin: var(--space-7) 0;
+    }
+
+    .newsletter-container {
+        background-color: var(--color-primary-500);
+        border-radius: var(--border-radius-lg);
+        padding: var(--space-5);
+        text-align: center;
+    }
+
+    .newsletter-content {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .newsletter-content h2 {
+        color: white;
+        margin-bottom: var(--space-3);
+    }
+
+    .newsletter-content p {
+        color: white;
+        opacity: 0.9;
+        margin-bottom: var(--space-4);
+    }
+
+    .newsletter-form {
+        display: flex;
+        gap: var(--space-2);
+    }
+
+    .newsletter-form input {
+        flex: 1;
+        padding: var(--space-2) var(--space-3);
+        border: none;
+        border-radius: var(--border-radius-md);
+        font-family: var(--font-body);
+    }
+
+    .newsletter-form button {
+        background-color: var(--color-accent-400);
+        color: var(--color-neutral-800);
+    }
+
+    .newsletter-form button:hover {
+        background-color: var(--color-accent-500);
+    }
+
+    @media (max-width: 768px) {
+        .about-content {
+            grid-template-columns: 1fr;
+        }
+
+        .about-image {
+            order: -1;
+            height: 300px;
+        }
+
+        .newsletter-form {
+            flex-direction: column;
+        }
+
+        .newsletter-form input,
+        .newsletter-form button {
+            width: 100%;
+        }
+    }
+</style>
