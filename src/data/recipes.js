@@ -147,7 +147,9 @@ export const recipes = [
             "Encender una chimenea de carbón y vaciarla al centro del asador y aplicar un poco de aceite a la parrilla para evitar que el pollo se pegue lo menor posible.",
             "Sellar las brochetas por ambos lados a calor directo, sin mover por los primero minutos, ya que el pollo tiende a pegarse hasta no dorarse por completo.",
             "Mover a calor indirecto hasta que alcancen una temperatura de 160ºF / 70-75ºC",
-            "Ensalada turca",
+        ],
+        instructionName: "Ensalada turca",
+        moreInstructions: [
             "Mezclar todos los ingredientes, aderezar con el jugo de limón y aceite de oliva, salpimentar al gusto. Reservar en un lugar fresco.",
             "Retirar del asador y servir acompañado con pan árabe a la parrilla y ensalada turca.",
         ],
