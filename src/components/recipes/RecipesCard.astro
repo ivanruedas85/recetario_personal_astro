@@ -8,6 +8,7 @@ interface Props {
     rating: number;
     category: string;
     hasMultipleIngredients?: boolean;
+    hasMultipleInstructions?: boolean;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
     rating,
     category,
     hasMultipleIngredients = false,
+    hasMultipleInstructions = false,
 } = Astro.props;
 
 // Format the difficulty string to capitalize first letter
@@ -29,6 +31,9 @@ const formattedDifficulty =
 const fullStars = Math.floor(rating);
 const hasHalfStar = rating % 1 >= 0.5;
 const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+// Check if this is a complete recipe (has multiple ingredients OR instructions)
+const isCompleteRecipe = hasMultipleIngredients || hasMultipleInstructions;
 ---
 
 <div class="recipe-card">
@@ -37,7 +42,7 @@ const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
             <img src={image} alt={title} loading="lazy" />
             <div class="recipe-category">{category}</div>
             {
-                hasMultipleIngredients && (
+                isCompleteRecipe && (
                     <div class="recipe-badge">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

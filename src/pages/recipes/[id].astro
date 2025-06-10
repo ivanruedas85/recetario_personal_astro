@@ -31,6 +31,12 @@ const hasMultipleIngredients =
     recipe.ingredientsName &&
     recipe.moreIngredients &&
     recipe.moreIngredients.length > 0;
+
+// Check if recipe has multiple instruction groups
+const hasMultipleInstructions =
+    recipe.instructionName &&
+    recipe.moreInstructions &&
+    recipe.moreInstructions.length > 0;
 ---
 
 <Layout title={recipe.title} description={recipe.description}>
@@ -203,6 +209,31 @@ const hasMultipleIngredients =
                             )
                         }
                     </ol>
+
+                    {
+                        hasMultipleInstructions && (
+                            <div class="additional-instructions">
+                                <h3>{recipe.instructionName}</h3>
+                                <ol class="additional-steps">
+                                    {recipe.moreInstructions.map(
+                                        (step: string, index: number) => (
+                                            <li>
+                                                <div class="step-number additional-step-number">
+                                                    {recipe.instructions
+                                                        .length +
+                                                        index +
+                                                        1}
+                                                </div>
+                                                <div class="step-text">
+                                                    {step}
+                                                </div>
+                                            </li>
+                                        ),
+                                    )}
+                                </ol>
+                            </div>
+                        )
+                    }
                 </div>
 
                 <div class="recipe-actions">
@@ -501,6 +532,36 @@ const hasMultipleIngredients =
     .additional-ingredients h3::before {
         content: "";
         font-size: 1.5rem;
+    }
+
+    .additional-instructions {
+        margin-top: var(--space-4);
+        padding-top: var(--space-4);
+        border-top: 2px solid var(--color-secondary-200);
+    }
+
+    .additional-instructions h3 {
+        font-size: 1.2rem;
+        margin-bottom: var(--space-3);
+        color: var(--color-secondary-600);
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+    }
+
+    .additional-instructions h3::before {
+        content: "";
+        font-size: 1.5rem;
+    }
+
+    .additional-steps {
+        padding-left: 0;
+        counter-reset: none;
+        list-style: none;
+    }
+
+    .additional-step-number {
+        background-color: var(--color-secondary-500) !important;
     }
 
     .recipe-ingredients ul {

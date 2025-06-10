@@ -37,6 +37,15 @@ const hasMultipleIngredients = (recipe) => {
         recipe.moreIngredients.length > 0
     );
 };
+
+// Function to detect if recipe has multiple instruction groups
+const hasMultipleInstructions = (recipe) => {
+    return (
+        recipe.instructionName &&
+        recipe.moreInstructions &&
+        recipe.moreInstructions.length > 0
+    );
+};
 ---
 
 <section class="recipe-grid-section">
@@ -54,6 +63,7 @@ const hasMultipleIngredients = (recipe) => {
                     rating={recipe.rating}
                     category={recipe.category}
                     hasMultipleIngredients={hasMultipleIngredients(recipe)}
+                    hasMultipleInstructions={hasMultipleInstructions(recipe)}
                 />
             ))
         }
