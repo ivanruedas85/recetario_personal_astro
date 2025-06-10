@@ -3,13 +3,6 @@ import NavBar from "../components/header_bar/Navbar.astro";
 import Footer from "../components/footer/Footer.astro";
 import BaseHeader from "../components/other/BaseHeader.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
-
-export interface Props {
-	title: string;
-	description: string;
-}
-
-const { title, description } = Astro.props;
 ---
 
 <!doctype html>
