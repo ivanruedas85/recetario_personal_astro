@@ -1,0 +1,25 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+    imagePath: string;
+    altText: string;
+    name: string;
+    age: number;
+}
+
+const { imagePath, altText, name, age } = Astro.props;
+const imagenes = import.meta.glob<{ default: ImageMetadata }>(
+    `/src/assets/images/*.{jpeg, jpg, png, gif, webp}`,
+);
+if (!imagenes[imagePath])
+    throw new Error(
+        `"${imagePath}" no existe en glob: "src/assets/images/*.{jpeg, jpg, png, gif, webp}"`,
+    );
+---
+
+<div class="card">
+    <h2>{name}</h2>
+    <p>Age: {age}</p>
+    <Image src={imagenes[imagePath]()} alt={altText} />
+</div>
