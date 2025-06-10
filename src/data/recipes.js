@@ -128,7 +128,9 @@ export const recipes = [
             "1 pizca canela",
             "El jugo de un limon amarillo",
             "6 dientes de ajo quebrados",
-            "(Ensalada turca)",
+        ],
+        ingredientsName: "Ensalada turca",
+        moreIngredients: [
             "½ pepino picado con cáscara",
             "½taza perejil picado",
             "12 hojas menta picadas",
