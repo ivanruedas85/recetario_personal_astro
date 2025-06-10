@@ -28,6 +28,15 @@ if (featured) {
 if (limit && limit > 0) {
     filteredRecipes = filteredRecipes.slice(0, limit);
 }
+
+// Function to detect if recipe has multiple ingredient groups
+const hasMultipleIngredients = (recipe) => {
+    return (
+        recipe.ingredientsName &&
+        recipe.moreIngredients &&
+        recipe.moreIngredients.length > 0
+    );
+};
 ---
 
 <section class="recipe-grid-section">
@@ -44,6 +53,7 @@ if (limit && limit > 0) {
                     difficulty={recipe.difficulty}
                     rating={recipe.rating}
                     category={recipe.category}
+                    hasMultipleIngredients={hasMultipleIngredients(recipe)}
                 />
             ))
         }

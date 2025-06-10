@@ -25,6 +25,12 @@ const relatedRecipes = recipes
 const fullStars = Math.floor(recipe.rating);
 const hasHalfStar = recipe.rating % 1 >= 0.5;
 const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+// Check if recipe has multiple ingredient groups
+const hasMultipleIngredients =
+    recipe.ingredientsName &&
+    recipe.moreIngredients &&
+    recipe.moreIngredients.length > 0;
 ---
 
 <Layout title={recipe.title} description={recipe.description}>
@@ -156,6 +162,29 @@ const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
                             ))
                         }
                     </ul>
+
+                    {
+                        hasMultipleIngredients && (
+                            <div class="additional-ingredients">
+                                <h3>Para el {recipe.ingredientsName}</h3>
+                                <ul>
+                                    {recipe.moreIngredients.map(
+                                        (ingredient: string) => (
+                                            <li>
+                                                <label class="ingredient-checkbox">
+                                                    <input type="checkbox" />
+                                                    <span class="checkmark" />
+                                                    <span class="ingredient-text">
+                                                        {ingredient}
+                                                    </span>
+                                                </label>
+                                            </li>
+                                        ),
+                                    )}
+                                </ul>
+                            </div>
+                        )
+                    }
                 </div>
 
                 <div class="recipe-instructions">
@@ -452,6 +481,26 @@ const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
         font-size: 1.5rem;
         margin-bottom: var(--space-3);
         color: var(--color-neutral-900);
+    }
+
+    .additional-ingredients {
+        margin-top: var(--space-4);
+        padding-top: var(--space-4);
+        border-top: 2px solid var(--color-primary-200);
+    }
+
+    .additional-ingredients h3 {
+        font-size: 1.2rem;
+        margin-bottom: var(--space-3);
+        color: var(--color-primary-600);
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+    }
+
+    .additional-ingredients h3::before {
+        content: "🥑";
+        font-size: 1.5rem;
     }
 
     .recipe-ingredients ul {
