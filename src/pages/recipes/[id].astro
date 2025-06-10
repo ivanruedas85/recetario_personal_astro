@@ -166,7 +166,7 @@ const hasMultipleIngredients =
                     {
                         hasMultipleIngredients && (
                             <div class="additional-ingredients">
-                                <h3>Para el {recipe.ingredientsName}</h3>
+                                <h3>{recipe.ingredientsName}</h3>
                                 <ul>
                                     {recipe.moreIngredients.map(
                                         (ingredient: string) => (
@@ -499,7 +499,7 @@ const hasMultipleIngredients =
     }
 
     .additional-ingredients h3::before {
-        content: "🥑";
+        content: "";
         font-size: 1.5rem;
     }
 
