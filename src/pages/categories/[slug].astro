@@ -1,8 +1,8 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import RecipeGrid from "@recipes/RecipeGrid.astro";
-import { categorias } from "@data/categorias";
-import { recipes } from "@data/recipes";
+import Layout from "../../layouts/Layout.astro";
+import RecipeGrid from "../../components/recipes/RecipeGrid.astro";
+import { categorias } from "../../data/categorias";
+import { recipes } from "../../data/recipes";
 
 export function getStaticPaths() {
     return categorias.map((category) => ({

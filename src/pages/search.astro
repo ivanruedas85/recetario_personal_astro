@@ -1,7 +1,7 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import RecipeCard from "@recipes/RecipesCard.astro";
-import { recipes } from "@data/recipes";
+import Layout from "../layouts/Layout.astro";
+import RecipeCard from "../components/recipes/RecipesCard.astro";
+import { recipes } from "../data/recipes";
 
 // Get the search query from URL
 const query = Astro.url.searchParams.get("q") || "";
@@ -34,7 +34,8 @@ const description = `Resultados de búsqueda para "${query}" en nuestro recetari
             <div class="search-query">
                 <p>
                     Mostrando resultados para: <span class="highlight"
-                        >{query}</span>
+                        >{query}</span
+                    >
                 </p>
                 <p class="results-count">
                     {searchResults.length} recetas encontradas
