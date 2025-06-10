@@ -2,6 +2,8 @@
 import Layout from "../../layouts/Layout.astro";
 import RecipeGrid from "../../components/recipes/RecipeGrid.astro";
 import { recipes } from "../../data/recipes";
+import CardComponents from "../../components/imagesComponents/CardComponents.astro";
+import NavLinks from "../../components/header_bar/NavLinks.astro";
 
 export function getStaticPaths() {
     return recipes.map((recipe) => ({
@@ -42,12 +44,18 @@ const hasMultipleInstructions =
 <Layout title={recipe.title} description={recipe.description}>
     <div class="recipe-details">
         <div class="recipe-header">
-            <div class="recipe-breadcrumbs">NavLinks href="/">Inicio</div> &gt; NavLinks
-            href="/recipes">Recetas
-        </div> &gt; NavLinks href={
-            `/categories/${recipe.category.toLowerCase()}`
-        }
-        >{recipe.category}
+            <div class="recipe-breadcrumbs">
+                <NavLinks href="/recetario_personal_astro/">Inicio</NavLinks>
+            </div>
+            &gt;
+            <NavLinks href="/recetario_personal_astro/recipes">Recetas</NavLinks
+            >
+        </div>
+        &gt;
+        <NavLinks
+            href={`/recetario_personal_astro/categories/${recipe.category.toLowerCase()}`}
+            >{recipe.category}</NavLinks
+        >
     </div>
 </Layout>
 
@@ -133,7 +141,13 @@ const hasMultipleInstructions =
 
 <div class="recipe-content">
     <div class="recipe-image-container">
-        <img src={recipe.image} alt={recipe.title} class="recipe-image" />
+        <CardComponents
+            imagePath={recipe.image}
+            altText={recipe.title}
+            name={recipe.title}
+            loading="lazy"
+            class:list={"recipe-image"}
+        />
     </div>
 
     <div class="recipe-info">

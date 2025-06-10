@@ -5,10 +5,10 @@ interface Props {
     imagePath: string;
     altText: string;
     name: string;
-    age: number;
+    loading: string;
 }
 
-const { imagePath, altText, name, age } = Astro.props;
+const { imagePath, altText, name, loading } = Astro.props;
 const imagenes = import.meta.glob<{ default: ImageMetadata }>(
     `/src/assets/images/*.{jpeg, jpg, png, gif, webp}`,
 );
@@ -20,6 +20,5 @@ if (!imagenes[imagePath])
 
 <div class="card">
     <h2>{name}</h2>
-    <p>Age: {age}</p>
-    <Image src={imagenes[imagePath]()} alt={altText} />
+    <Image src={imagenes[imagePath]()} alt={altText} loading="lazy" />
 </div>

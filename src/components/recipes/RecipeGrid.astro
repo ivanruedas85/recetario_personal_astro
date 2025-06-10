@@ -1,6 +1,7 @@
 ---
 import RecipeCard from "./RecipesCard.astro";
 import { recipes } from "../../data/recipes";
+import CardComponents from "../imagesComponents/CardComponents.astro";
 
 interface Props {
     title?: string;
@@ -57,7 +58,14 @@ const hasMultipleInstructions = (recipe) => {
                 <RecipeCard
                     id={recipe.id}
                     title={recipe.title}
-                    image={recipe.image}
+                    image={
+                        <CardComponents
+                            imagePath={recipe.image}
+                            altText={`id=${recipe.id}`}
+                            name={`title=${recipe.title}`}
+                            loading="lazy"
+                        />
+                    }
                     time={recipe.cookingTime}
                     difficulty={recipe.difficulty}
                     rating={recipe.rating}
