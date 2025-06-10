@@ -1,18 +1,18 @@
 [
     {
         "name": "Inicio",
-        "url": "/"
+        "url": "/recetario_personal_astro/"
     },
     {
         "name": "Recetas",
-        "url": "/recipes"
+        "url": "/recetario_personal_astro/recipes"
     },
     {
         "name": "Categorías",
-        "url": "/categories"
+        "url": "/recetario_personal_astro/categories"
     },
     {
         "name": "Acerca de",
-        "url": "/about"
+        "url": "/recetario_personal_astro/about"
     }
 ]
