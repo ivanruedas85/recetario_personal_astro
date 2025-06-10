@@ -1,11 +1,12 @@
 ---
+import NavLinks from "../header_bar/NavLinks.astro";
 import RecipeGrid from "./RecipeGrid.astro";
 ---
 
 <section class="featured-recipes">
     <div class="section-header">
         <h2 class="section-title">Recetas Destacadas</h2>
-        <a href="/recipes" class="view-all">Ver todas</a>
+        <NavLinks href="/recipes" class="view-all">Ver todas</NavLinks>
     </div>
 
     <RecipeGrid featured={true} limit={4} />

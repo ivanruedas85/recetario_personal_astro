@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import CategoryList from "../../components/lists/CategoryList.astro";
+import NavLinks from "../../components/header_bar/NavLinks.astro";
 
 const pageTitle = "Categorías de Recetas";
 const description =
@@ -20,36 +21,51 @@ const description =
         <section class="dietary-preferences">
             <h2>Preferencias Dietéticas</h2>
             <div class="dietary-grid">
-                <a href="/categories/vegetariana" class="dietary-item">
+                <NavLinks
+                    href="/recetario_personal_astro/categories/vegetariana"
+                    class="dietary-item"
+                >
                     <div class="dietary-icon">🥗</div>
                     <h3>Vegetarianas</h3>
                     <p>Deliciosas recetas sin carne</p>
-                </a>
+                </NavLinks>
 
-                <a href="/categories/vegana" class="dietary-item">
+                <NavLinks
+                    href="/recetario_personal_astro/categories/vegana"
+                    class="dietary-item"
+                >
                     <div class="dietary-icon">🌱</div>
                     <h3>Veganas</h3>
                     <p>Platos sin productos animales</p>
-                </a>
+                </NavLinks>
 
-                <a href="/categories/sin-gluten" class="dietary-item">
+                <NavLinks
+                    href="/recetario_personal_astro/categories/sin-gluten"
+                    class="dietary-item"
+                >
                     <div class="dietary-icon">🌾</div>
                     <h3>Sin Gluten</h3>
                     <p>Recetas para celíacos</p>
-                </a>
+                </NavLinks>
 
-                <a href="/categories/sin-lactosa" class="dietary-item">
+                <NavLinks
+                    href="/recetario_personal_astro/categories/sin-lactosa"
+                    class="dietary-item"
+                >
                     <div class="dietary-icon">🥛</div>
                     <h3>Sin Lactosa</h3>
                     <p>Para intolerantes a la lactosa</p>
-                </a>
+                </NavLinks>
             </div>
         </section>
 
         <section class="cuisines">
             <h2>Cocinas del Mundo</h2>
             <div class="cuisines-grid">
-                <a href="/categories/mediterranea" class="cuisine-item">
+                <NavLinks
+                    href="/recetario_personal_astro/categories/mediterranea"
+                    class="cuisine-item"
+                >
                     <img
                         src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=600"
                         alt="Cocina Mediterránea"
@@ -58,9 +74,12 @@ const description =
                     <div class="cuisine-overlay">
                         <h3>Mediterránea</h3>
                     </div>
-                </a>
+                </NavLinks>
 
-                <a href="/categories/asiatica" class="cuisine-item">
+                <NavLinks
+                    href="/recetario_personal_astro/categories/asiatica"
+                    class="cuisine-item"
+                >
                     <img
                         src="https://images.pexels.com/photos/1731535/pexels-photo-1731535.jpeg?auto=compress&cs=tinysrgb&w=600"
                         alt="Cocina Asiática"
@@ -69,9 +88,12 @@ const description =
                     <div class="cuisine-overlay">
                         <h3>Asiática</h3>
                     </div>
-                </a>
+                </NavLinks>
 
-                <a href="/categories/latinoamericana" class="cuisine-item">
+                <NavLinks
+                    href="/recetario_personal_astro/categories/latinoamericana"
+                    class="cuisine-item"
+                >
                     <img
                         src="https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?auto=compress&cs=tinysrgb&w=600"
                         alt="Cocina Latinoamericana"
@@ -80,9 +102,12 @@ const description =
                     <div class="cuisine-overlay">
                         <h3>Latinoamericana</h3>
                     </div>
-                </a>
+                </NavLinks>
 
-                <a href="/categories/americana" class="cuisine-item">
+                <NavLinks
+                    href="/recetario_personal_astro/categories/americana"
+                    class="cuisine-item"
+                >
                     <img
                         src="https://images.pexels.com/photos/2983101/pexels-photo-2983101.jpeg?auto=compress&cs=tinysrgb&w=600"
                         alt="Cocina Americana"
@@ -91,7 +116,7 @@ const description =
                     <div class="cuisine-overlay">
                         <h3>Americana</h3>
                     </div>
-                </a>
+                </NavLinks>
             </div>
         </section>
     </div>

@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import RecipeCard from "../components/recipes/RecipesCard.astro";
 import { recipes } from "../data/recipes";
+import NavLinks from "../components/header_bar/NavLinks.astro";
 
 // Get the search query from URL
 const query = Astro.url.searchParams.get("q") || "";
@@ -87,9 +88,12 @@ const description = `Resultados de búsqueda para "${query}" en nuestro recetari
                             </li>
                         </ul>
                     </div>
-                    <a href="/recipes" class="btn btn-primary">
+                    <NavLinks
+                        href="/recetario_personal_astro/recipes"
+                        class="btn btn-primary"
+                    >
                         Ver todas las recetas
-                    </a>
+                    </NavLinks>
                 </div>
             )
         }
