@@ -5,7 +5,6 @@ import FeaturedRecipes from "../components/recipes/FeaturedRecipes.astro";
 import CategoryList from "../components/lists/CategoryList.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import NavLinks from "../components/header_bar/NavLinks.astro";
-import CardComponents from "src/components/imagesComponents/CardComponents.astro";
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -37,10 +36,9 @@ import CardComponents from "src/components/imagesComponents/CardComponents.astro
             </div>
             <div class="about-image">
                 <figure>
-                    <CardComponents
-                        imagePath="/src/assets/images/portada_tere.jpg"
-                        altText="Portada de Teresa Gonzalez Torres."
-                        name="Teresa"
+                    <img
+                        src="/src/assets/images/portada_tere.webp"
+                        alt="Portada de Teresa Gonzalez Torres."
                         loading="lazy"
                     />
                     <figcaption>
