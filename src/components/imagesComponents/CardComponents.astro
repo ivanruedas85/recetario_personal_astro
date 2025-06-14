@@ -10,11 +10,11 @@ interface Props {
 
 const { imagePath, altText, name, loading } = Astro.props;
 const imagenes = import.meta.glob<{ default: ImageMetadata }>(
-    `/recetario_personal_astro/src/assets/images/*.{jpeg, jpg, png, gif, webp, svg}`,
+    `/src/assets/images/*.{jpeg, jpg, png, gif, webp, svg}`,
 );
 if (!imagenes[imagePath])
     throw new Error(
-        `"${imagePath}" no existe en glob: "/recetario_personal_astro/src/assets/images/*.{jpeg, jpg, png, gif, webp, svg}"`,
+        `"${imagePath}" no existe en glob: "/src/assets/images/*.{jpeg, jpg, png, gif, webp, svg}"`,
     );
 ---
 
