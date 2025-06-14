@@ -7,30 +7,43 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/favicon.svg" } = Astro.props;
+const {
+    title,
+    description,
+    image = "/recetario_personal_astro/favicon.svg",
+} = Astro.props;
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link
+    rel="icon"
+    type="image/png"
+    href="/recetario_personal_astro/favicon-96x96.png"
+    sizes="96x96"
+/>
 <link rel="icon" type="image/svg+xml" href={image} />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="manifest" href="/site.webmanifest" />
+<link rel="shortcut icon" href="/recetario_personal_astro/favicon.ico" />
+<link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/recetario_personal_astro/apple-touch-icon.png"
+/>
+<link rel="manifest" href="/recetario_personal_astro/site.webmanifest" />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
 <link
     rel="preload"
-    href="/fonts/Barista_Script.otf"
+    href="/recetario_personal_astro/fonts/Barista_Script.otf"
     as="font"
     type="font/otf"
     crossorigin
 />
 <link
     rel="preload"
-    href="/fonts/Bootstrap-icons.woff"
+    href="/recetario_personal_astro/fonts/Bootstrap-icons.woff"
     as="font"
     type="font/woff"
     crossorigin
