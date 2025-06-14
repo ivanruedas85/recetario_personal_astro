@@ -3,22 +3,12 @@ import NavLinks from "./NavLinks.astro";
 import SearchBar from "./SearchBar.astro";
 import Routes from "../../data/routes.json";
 import { SITE_TITLE } from "../../consts";
-import CardComponents from "../imagesComponents/CardComponents.astro";
 ---
 
 <header class="site-header">
     <div class="container header-container">
         <div class="logo">
             <NavLinks href="/recetario_personal_astro/" class="logo-link">
-                <CardComponents
-                    class:list={"logo-icon"}
-                    imagePath="/favicon.svg"
-                    altText="icono de la página"
-                    name="Icono de la página"
-                    loading="lazy"
-                />
-            </NavLinks>
-            <NavLinks href="/" class="logo-link">
                 <span class="logo-text">{SITE_TITLE}</span>
             </NavLinks>
         </div>
